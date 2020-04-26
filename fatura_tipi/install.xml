@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>Fatura Tipi Seçimi</name>
+    <code>tekno_faturatipi</code>
+    <version>0.01</version>
+    <author>Tulpar Studyo</author>
+    <link></link>
+    <file path="catalog/controller/checkout/guest.php" error="skip">
+        <operation error="skip">
+            <search><![CDATA[ $this->response->setOutput(json_encode($json)); ]]></search>
+            <add position="before"><![CDATA[
+        // tulpar studyo
+        $this->load->model('checkout/fatura_tipi');
+        $this->model_checkout_fatura_tipi->set_data();
+		$this->response->addHeader('Content-Type: application/json');
+]]></add>
+        </operation>
+        <operation error="skip">
+            <search><![CDATA[ $this->response->setOutput($this->load->view('checkout/guest', $data)); ]]></search>
+            <add position="before"><![CDATA[
+        // tulpar studyo
+        $this->load->model('checkout/fatura_tipi');
+        $data['extra'] =  $this->model_checkout_fatura_tipi->get_data();
+        $data['fatura_tipi_form'] =  $this->model_checkout_fatura_tipi->get_form();
+]]></add>
+        </operation>
+	</file>
+    <file path="catalog/controller/checkout/payment_address.php" error="skip">
+        <operation error="skip">
+            <search><![CDATA[ $this->response->setOutput(json_encode($json)); ]]></search>
+            <add position="before"><![CDATA[
+        // tulpar studyo
+        $this->load->model('checkout/fatura_tipi');
+        $this->model_checkout_fatura_tipi->set_data();
+		$this->response->addHeader('Content-Type: application/json');
+]]></add>
+        </operation>
+        <operation error="skip">
+            <search><![CDATA[ $this->response->setOutput($this->load->view('checkout/guest', $data)); ]]></search>
+            <add position="before"><![CDATA[
+        // tulpar studyo
+        $this->load->model('checkout/fatura_tipi');
+        $data['extra'] =  $this->model_checkout_fatura_tipi->get_data();
+        $data['fatura_tipi_form'] =  $this->model_checkout_fatura_tipi->get_form();
+]]></add>
+        </operation>
+	</file>
+    <file path="catalog/controller/checkout/payment_address.php" error="skip">
+        <operation error="skip">
+            <search><![CDATA[ $this->response->setOutput(json_encode($json)); ]]></search>
+            <add position="before"><![CDATA[
+        // tulpar studyo
+        $this->load->model('checkout/fatura_tipi');
+        $this->model_checkout_fatura_tipi->set_data();
+		$this->response->addHeader('Content-Type: application/json');
+]]></add>
+        </operation>
+        <operation error="skip">
+            <search><![CDATA[ $this->response->setOutput($this->load->view('checkout/payment_address', $data)); ]]></search>
+            <add position="before"><![CDATA[
+        // tulpar studyo
+        $this->load->model('checkout/fatura_tipi');
+        $data['extra'] =  $this->model_checkout_fatura_tipi->get_data();
+        $data['fatura_tipi_form'] =  $this->model_checkout_fatura_tipi->get_form();
+]]></add>
+        </operation>
+	</file>
+    <file path="catalog/view/theme/*/template/checkout/guest.twig" error="skip">
+        <operation error="skip">
+            <search><![CDATA[ <span id="faturatipi"></span> ]]></search>
+            <add position="before"><![CDATA[
+        <!-- tulpar studyo -->
+        {{ fatura_tipi_form }}
+]]></add>
+        </operation>
+	</file>
+    <file path="catalog/view/theme/*/template/checkout/payment_address.twig" error="skip">
+        <operation error="skip">
+            <search><![CDATA[ <span id="faturatipi"></span> ]]></search>
+            <add position="before"><![CDATA[
+        <!-- tulpar studyo -->
+        <div class="col-md-12">{{ fatura_tipi_form }} </div>
+        <div class="clear"></div>
+]]></add>
+        </operation>
+	</file>
+    <file path="catalog/model/checkout/order.php" error="skip">
+        <operation error="skip">
+            <search><![CDATA[ $order_id = $this->db->getLastId(); ]]></search>
+            <add position="after"><![CDATA[
+        // tulpar studyo
+        $this->load->model('checkout/fatura_tipi');
+        $this->model_checkout_fatura_tipi->fix_order($order_id, $_POST);
+]]></add>
+        </operation>
+	</file>
+    <file path="admin/controller/sale/order.php" error="skip">
+        <operation error="skip">
+            <search><![CDATA[ $this->response->setOutput($this->load->view('sale/order_info', $data)); ]]></search>
+            <add position="before"><![CDATA[
+        // tulpar studyo
+        $this->load->model('sale/fatura_tipi');
+        $data['fatura_tipi_form'] = $this->model_sale_fatura_tipi->get_form($order_id);
+        if(isset($_POST['extra'])){ 
+            $this->response->redirect($this->url->link('sale/order/info', 'user_token=' . $this->session->data['user_token'].'&order_id='.$order_id, true));
+        }
+]]></add>
+        </operation>
+	</file>
+    <file path="admin/view/template/sale/order_info.twig" error="skip">
+        <operation error="skip">
+            <search><![CDATA[ {% if comment %} ]]></search>
+            <add position="before"><![CDATA[
+        <!-- tulpar studyo -->
+        {{ fatura_tipi_form }}
+]]></add>
+        </operation>
+	</file>
+    
+</modification>
