@@ -4,13 +4,13 @@ class ModelCheckoutFaturaTipi extends Model {
         $query = $this->db->query("SELECT *, MAX(order_id) FROM `".DB_PREFIX."order` LIMIT 1;");
         if(!array_key_exists('fatura_tipi',$query->row)){
             $sql = "ALTER TABLE `".DB_PREFIX."order` 
-            ADD `fatura_tipi` VARCHAR(16) NULL DEFAULT NULL AFTER `pazaryeri_fatura_no`, 
-            ADD `tc_kimlik` VARCHAR(11) NULL DEFAULT NULL AFTER `fatura_tipi`, 
-            ADD `sirket_adi` VARCHAR(256) NULL DEFAULT NULL AFTER `tc_kimlik`, 
-            ADD `vergi_no` VARCHAR(16) NULL DEFAULT NULL AFTER `sirket_adi`, 
-            ADD `vergi_dairesi` VARCHAR(256) NULL DEFAULT NULL AFTER `vergi_no`;";
+            ADD `fatura_tipi` VARCHAR(16) NULL DEFAULT NULL , 
+            ADD `tc_kimlik` VARCHAR(11) NULL DEFAULT NULL , 
+            ADD `sirket_adi` VARCHAR(256) NULL DEFAULT NULL , 
+            ADD `vergi_no` VARCHAR(16) NULL DEFAULT NULL , 
+            ADD `vergi_dairesi` VARCHAR(256) NULL DEFAULT NULL ;";
             $this->db->query($sql);
-        }
+       }
         $data = $this->get_data();
         $sql = "UPDATE `".DB_PREFIX."order` SET `order_id`=".(int)$order_id;
         if($data['fatura_tipi']) $sql .= ", `fatura_tipi`='".$this->db->escape($data['fatura_tipi'])."'";
