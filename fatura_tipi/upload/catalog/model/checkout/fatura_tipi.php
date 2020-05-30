@@ -22,7 +22,7 @@ class ModelCheckoutFaturaTipi extends Model {
         $this->db->query($sql);
     }
     public function set_data(){
-        if(!isset($_POST['extra']['fatura_tipi'])) die('boş');
+        //if(!isset($_POST['extra']['fatura_tipi'])) die('boş');
         $this->session->data['extra'] = isset($_POST['extra'])?$_POST['extra']:array();
     }
     public function get_data(){
