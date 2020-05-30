@@ -87,8 +87,7 @@ class ModelCheckoutFaturaTipi extends Model {
           });
           $(".fatura_tipi").change();
           </script> 
-</div><style>#faturatipi{clear: both;display: inherit;}</style>
-';
+</div><style>#faturatipi{clear: both;display: inherit;}</style>';
         return $html;
     }
     
